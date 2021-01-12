@@ -1,0 +1,426 @@
+{
+    "source": "mockoon:1.11.0",
+    "data": [
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 13,
+                "name": "cart-v2",
+                "endpointPrefix": "",
+                "latency": 0,
+                "port": 3003,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "api/v1/checkout/cart",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"message\": \"success\",\n  \"data\": {\n    \"cartId\": \"{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}{{ faker 'random.alphaNumeric' }}\"\n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "api/v1/checkout/:CARTID/item",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"status\" : \"error\",\n  \"message\" : \"requisição invalida, verifique os valores informados\"\n}",
+                                "latency": 0,
+                                "statusCode": 400,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\r\n  \"message\": \"success\",\r\n\t\"code\": \"CHK-9999\",\r\n\t\"data\": {\r\n        \"cartId\": \"{{urlParam 'CARTID'}}\",\r\n        \"totalizers\": {\r\n            \"itemsValue\": 319.94,\r\n            \"totalDiscountsValue\": 0,\r\n            \"giftcardValue\": null,\r\n            \"totalValue\": 319.94,\r\n            \"subtotalValue\": 319.94,\r\n            \"shipping\": \"A calcular\",\r\n            \"totalInstallments\": 5,\r\n            \"installmentsValue\": 53.32\r\n        },\r\n        \"discountCoupon\": \"\",\r\n        \"warning\": \"\",\r\n        \"items\": [{\r\n                \"productId\": \"3008262\",\r\n                \"id\": \"3534793\",\r\n                \"itemId\": \"3534793\",\r\n                \"imageUrl\": \"http://cea.vteximg.com.br/arquivos/ids/23911788-200-240/Vestido-de-Tule-Feminino-Longo-Estampado-Tie-Dye-com-Fenda-Alca-Fina-Multicor-9967945-Multicor_1.jpg?v=637453889132330000\",\r\n                \"name\": \"Vestido de Tule Feminino Longo Estampado Tie Dye com Fenda Alça Fina Multicor P\",\r\n                \"skuName\": \"P\",\r\n                \"quantity\": 1,\r\n                \"limitQuantity\": 5,\r\n                \"sellerName\": \"C&A\",\r\n                \"price\": 119.99,\r\n                \"listPrice\": 119.99,\r\n                \"discount\": 0,\r\n                \"deliveryOptions\": [{\r\n                        \"name\": \"Entregar em casa\",\r\n                        \"type\": \"homeDelivery\",\r\n                        \"shippingEstimate\": \"Prazo a calcular\",\r\n                        \"selected\": true\r\n                    }, {\r\n                        \"name\": \"Retire na loja\",\r\n                        \"options\": null,\r\n                        \"type\": \"storeDelivery\",\r\n                        \"shippingEstimate\": \"A partir de 14 dias úteis\",\r\n                        \"selected\": true,\r\n                        \"selectedInfo\": {\r\n                            \"sla\": \"Retirada na Loja (MNU)\",\r\n                            \"shippingEstimate\": \"Retire a partir de 14 dias úteis\",\r\n                            \"selectedDeliveryChannel\": \"pickup-in-point\",\r\n                            \"store\": \"C&A North Shopping Maracanaú\"\r\n                        }\r\n                    }\r\n                ],\r\n\t\t\t\t\"message\": \"\"\r\n            }\r\n        ],\r\n        \"totalItems\": 1\r\n    }\r\n}\r\n\r\n\r\n\r\n",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "RECLICK RETIRE",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "body",
+                                        "modifier": "itemId",
+                                        "value": "[0-9]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "quantity",
+                                        "value": "[0-9]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "sellerId",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "params",
+                                        "modifier": "CARTID",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "deliveryOption",
+                                        "value": "Retirada na Loja \\(.*\\)",
+                                        "isRegex": true
+                                    }
+                                ],
+                                "rulesOperator": "AND",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\r\n  \"message\": \"success\",\r\n\t\"code\": \"CHK-0000\",\r\n\t\"data\": {\r\n        \"cartId\": \"{{urlParam 'CARTID'}}\",\r\n        \"totalizers\": {\r\n            \"itemsValue\": 319.94,\r\n            \"totalDiscountsValue\": 0,\r\n            \"giftcardValue\": null,\r\n            \"totalValue\": 319.94,\r\n            \"subtotalValue\": 319.94,\r\n            \"shipping\": \"A calcular\",\r\n            \"totalInstallments\": 5,\r\n            \"installmentsValue\": 53.32\r\n        },\r\n        \"discountCoupon\": \"\",\r\n        \"warning\": \"\",\r\n        \"items\": [{\r\n                \"productId\": \"3008262\",\r\n                \"id\": \"3534793\",\r\n                \"itemId\": \"3534793\",\r\n                \"imageUrl\": \"http://cea.vteximg.com.br/arquivos/ids/23911788-200-240/Vestido-de-Tule-Feminino-Longo-Estampado-Tie-Dye-com-Fenda-Alca-Fina-Multicor-9967945-Multicor_1.jpg?v=637453889132330000\",\r\n                \"name\": \"Vestido de Tule Feminino Longo Estampado Tie Dye com Fenda Alça Fina Multicor P\",\r\n                \"skuName\": \"P\",\r\n                \"quantity\": 1,\r\n                \"limitQuantity\": 5,\r\n                \"sellerName\": \"C&A\",\r\n                \"price\": 119.99,\r\n                \"listPrice\": 119.99,\r\n                \"discount\": 0,\r\n                \"deliveryOptions\": [{\r\n                        \"name\": \"Entregar em casa\",\r\n                        \"type\": \"homeDelivery\",\r\n                        \"shippingEstimate\": \"Prazo a calcular\",\r\n                        \"selected\": true\r\n                    }, {\r\n                        \"name\": \"Retire na loja\",\r\n                        \"options\": null,\r\n                        \"type\": \"storeDelivery\",\r\n                        \"shippingEstimate\": \"A partir de 14 dias úteis\",\r\n                        \"selected\": true,\r\n                        \"selectedInfo\": {\r\n                            \"sla\": \"Retirada na Loja (MNU)\",\r\n                            \"shippingEstimate\": \"Retire a partir de 14 dias úteis\",\r\n                            \"selectedDeliveryChannel\": \"pickup-in-point\",\r\n                            \"store\": \"C&A North Shopping Maracanaú\"\r\n                        }\r\n                    }\r\n                ],\r\n\t\t\t\t\"message\": \"\"\r\n            }\r\n        ],\r\n        \"totalItems\": 1\r\n    }\r\n}\r\n\r\n\r\n\r\n",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "body",
+                                        "modifier": "itemId",
+                                        "value": "[0-9]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "quantity",
+                                        "value": "[0-9]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "sellerId",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "params",
+                                        "modifier": "CARTID",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    }
+                                ],
+                                "rulesOperator": "AND",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "put",
+                        "endpoint": "api/v1/checkout/:CARTID/item",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"status\" : \"error\",\n  \"message\" : \"requisição invalida, verifique os valores informados\"\n}",
+                                "latency": 0,
+                                "statusCode": 400,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\r\n  \"message\": \"success\",\r\n\t\"code\": \"CHK-0000\",\r\n\t\"data\": {\r\n        \"cartId\": \"{{urlParam 'CARTID'}}\",\r\n        \"totalizers\": {\r\n            \"itemsValue\": 319.94,\r\n            \"totalDiscountsValue\": 0,\r\n            \"giftcardValue\": null,\r\n            \"totalValue\": 319.94,\r\n            \"subtotalValue\": 319.94,\r\n            \"shipping\": \"A calcular\",\r\n            \"totalInstallments\": 5,\r\n            \"installmentsValue\": 53.32\r\n        },\r\n        \"discountCoupon\": \"\",\r\n        \"warning\": \"\",\r\n        \"items\": [{\r\n                \"productId\": \"3008262\",\r\n                \"id\": \"3534793\",\r\n                \"itemId\": \"3534793\",\r\n                \"imageUrl\": \"http://cea.vteximg.com.br/arquivos/ids/23911788-200-240/Vestido-de-Tule-Feminino-Longo-Estampado-Tie-Dye-com-Fenda-Alca-Fina-Multicor-9967945-Multicor_1.jpg?v=637453889132330000\",\r\n                \"name\": \"Vestido de Tule Feminino Longo Estampado Tie Dye com Fenda Alça Fina Multicor P\",\r\n                \"skuName\": \"P\",\r\n                \"quantity\": 1,\r\n                \"limitQuantity\": 5,\r\n                \"sellerName\": \"C&A\",\r\n                \"price\": 119.99,\r\n                \"listPrice\": 119.99,\r\n                \"discount\": 0,\r\n                \"deliveryOptions\": [{\r\n                        \"name\": \"Entregar em casa\",\r\n                        \"type\": \"homeDelivery\",\r\n                        \"shippingEstimate\": \"Prazo a calcular\",\r\n                        \"selected\": true\r\n                    }, {\r\n                        \"name\": \"Retire na loja\",\r\n                        \"options\": null,\r\n                        \"type\": \"storeDelivery\",\r\n                        \"shippingEstimate\": \"A partir de 14 dias úteis\",\r\n                        \"selected\": true,\r\n                        \"selectedInfo\": {\r\n                            \"sla\": \"Retirada na Loja (MNU)\",\r\n                            \"shippingEstimate\": \"Retire a partir de 14 dias úteis\",\r\n                            \"selectedDeliveryChannel\": \"pickup-in-point\",\r\n                            \"store\": \"C&A North Shopping Maracanaú\"\r\n                        }\r\n                    }\r\n                ],\r\n\t\t\t\t\"message\": \"\"\r\n            }\r\n        ],\r\n        \"totalItems\": 1\r\n    }\r\n}\r\n\r\n\r\n\r\n",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "body",
+                                        "modifier": "itemId",
+                                        "value": "[0-9]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "quantity",
+                                        "value": "[0-9]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "params",
+                                        "modifier": "CARTID",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    }
+                                ],
+                                "rulesOperator": "AND",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "delete",
+                        "endpoint": "api/v1/checkout/:CARTID/item/:ITEMID",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"status\" : \"error\",\n  \"message\" : \"requisição invalida, verifique os valores informados\"\n}",
+                                "latency": 0,
+                                "statusCode": 400,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\r\n  \"message\": \"success\",\r\n\t\"code\": \"CHK-0000\",\r\n\t\"data\": {\r\n        \"cartId\": \"{{urlParam 'CARTID'}}\",\r\n        \"totalizers\": {\r\n            \"itemsValue\": 319.94,\r\n            \"totalDiscountsValue\": 0,\r\n            \"giftcardValue\": null,\r\n            \"totalValue\": 319.94,\r\n            \"subtotalValue\": 319.94,\r\n            \"shipping\": \"A calcular\",\r\n            \"totalInstallments\": 5,\r\n            \"installmentsValue\": 53.32\r\n        },\r\n        \"discountCoupon\": \"\",\r\n        \"warning\": \"\",\r\n        \"items\": [{\r\n                \"productId\": \"3008262\",\r\n                \"id\": \"3534793\",\r\n                \"itemId\": \"3534793\",\r\n                \"imageUrl\": \"http://cea.vteximg.com.br/arquivos/ids/23911788-200-240/Vestido-de-Tule-Feminino-Longo-Estampado-Tie-Dye-com-Fenda-Alca-Fina-Multicor-9967945-Multicor_1.jpg?v=637453889132330000\",\r\n                \"name\": \"Vestido de Tule Feminino Longo Estampado Tie Dye com Fenda Alça Fina Multicor P\",\r\n                \"skuName\": \"P\",\r\n                \"quantity\": 1,\r\n                \"limitQuantity\": 5,\r\n                \"sellerName\": \"C&A\",\r\n                \"price\": 119.99,\r\n                \"listPrice\": 119.99,\r\n                \"discount\": 0,\r\n                \"deliveryOptions\": [{\r\n                        \"name\": \"Entregar em casa\",\r\n                        \"type\": \"homeDelivery\",\r\n                        \"shippingEstimate\": \"Prazo a calcular\",\r\n                        \"selected\": true\r\n                    }, {\r\n                        \"name\": \"Retire na loja\",\r\n                        \"options\": null,\r\n                        \"type\": \"storeDelivery\",\r\n                        \"shippingEstimate\": \"A partir de 14 dias úteis\",\r\n                        \"selected\": true,\r\n                        \"selectedInfo\": {\r\n                            \"sla\": \"Retirada na Loja (MNU)\",\r\n                            \"shippingEstimate\": \"Retire a partir de 14 dias úteis\",\r\n                            \"selectedDeliveryChannel\": \"pickup-in-point\",\r\n                            \"store\": \"C&A North Shopping Maracanaú\"\r\n                        }\r\n                    }\r\n                ],\r\n\t\t\t\t\"message\": \"\"\r\n            }\r\n        ],\r\n        \"totalItems\": 1\r\n    }\r\n}\r\n\r\n\r\n\r\n",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "params",
+                                        "modifier": "CARTID",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "params",
+                                        "modifier": "ITEMID",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    }
+                                ],
+                                "rulesOperator": "AND",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "api/v1/checkout/:CARTID/item/delivery",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"status\" : \"error\",\n  \"message\" : \"requisição invalida, verifique os valores informados\"\n}",
+                                "latency": 0,
+                                "statusCode": 400,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\r\n  \"message\": \"success\",\r\n\t\"code\": \"CHK-9998\",\r\n\t\"data\": {\r\n        \"cartId\": \"{{urlParam 'CARTID'}}\",\r\n        \"totalizers\": {\r\n            \"itemsValue\": 319.94,\r\n            \"totalDiscountsValue\": 0,\r\n            \"giftcardValue\": null,\r\n            \"totalValue\": 319.94,\r\n            \"subtotalValue\": 319.94,\r\n            \"shipping\": \"A calcular\",\r\n            \"totalInstallments\": 5,\r\n            \"installmentsValue\": 53.32\r\n        },\r\n        \"discountCoupon\": \"\",\r\n        \"warning\": \"\",\r\n        \"items\": [{\r\n                \"productId\": \"3008262\",\r\n                \"id\": \"3534793\",\r\n                \"itemId\": \"3534793\",\r\n                \"imageUrl\": \"http://cea.vteximg.com.br/arquivos/ids/23911788-200-240/Vestido-de-Tule-Feminino-Longo-Estampado-Tie-Dye-com-Fenda-Alca-Fina-Multicor-9967945-Multicor_1.jpg?v=637453889132330000\",\r\n                \"name\": \"Vestido de Tule Feminino Longo Estampado Tie Dye com Fenda Alça Fina Multicor P\",\r\n                \"skuName\": \"P\",\r\n                \"quantity\": 1,\r\n                \"limitQuantity\": 5,\r\n                \"sellerName\": \"C&A\",\r\n                \"price\": 119.99,\r\n                \"listPrice\": 119.99,\r\n                \"discount\": 0,\r\n                \"deliveryOptions\": [{\r\n                        \"name\": \"Entregar em casa\",\r\n                        \"type\": \"homeDelivery\",\r\n                        \"shippingEstimate\": \"Prazo a calcular\",\r\n                        \"selected\": true\r\n                    }, {\r\n                        \"name\": \"Retire na loja\",\r\n                        \"options\": null,\r\n                        \"type\": \"storeDelivery\",\r\n                        \"shippingEstimate\": \"A partir de 14 dias úteis\",\r\n                        \"selected\": true,\r\n                        \"selectedInfo\": {\r\n                            \"sla\": \"Retirada na Loja (MNU)\",\r\n                            \"shippingEstimate\": \"Retire a partir de 14 dias úteis\",\r\n                            \"selectedDeliveryChannel\": \"pickup-in-point\",\r\n                            \"store\": \"C&A North Shopping Maracanaú\"\r\n                        }\r\n                    }\r\n                ],\r\n\t\t\t\t\"message\": \"\"\r\n            }\r\n        ],\r\n        \"totalItems\": 1\r\n    }\r\n}\r\n\r\n\r\n\r\n",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "CLICK RETIRE",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "params",
+                                        "modifier": "CARTID",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "itemId",
+                                        "value": "[\\d]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "postalCode",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "deliveryOption",
+                                        "value": "Retirada na Loja \\(.*\\)",
+                                        "isRegex": true
+                                    }
+                                ],
+                                "rulesOperator": "AND",
+                                "disableTemplating": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\r\n  \"message\": \"success\",\r\n\t\"code\": \"CHK-0000\",\r\n\t\"data\": {\r\n        \"cartId\": \"{{urlParam 'CARTID'}}\",\r\n        \"totalizers\": {\r\n            \"itemsValue\": 319.94,\r\n            \"totalDiscountsValue\": 0,\r\n            \"giftcardValue\": null,\r\n            \"totalValue\": 319.94,\r\n            \"subtotalValue\": 319.94,\r\n            \"shipping\": \"A calcular\",\r\n            \"totalInstallments\": 5,\r\n            \"installmentsValue\": 53.32\r\n        },\r\n        \"discountCoupon\": \"\",\r\n        \"warning\": \"\",\r\n        \"items\": [{\r\n                \"productId\": \"3008262\",\r\n                \"id\": \"3534793\",\r\n                \"itemId\": \"3534793\",\r\n                \"imageUrl\": \"http://cea.vteximg.com.br/arquivos/ids/23911788-200-240/Vestido-de-Tule-Feminino-Longo-Estampado-Tie-Dye-com-Fenda-Alca-Fina-Multicor-9967945-Multicor_1.jpg?v=637453889132330000\",\r\n                \"name\": \"Vestido de Tule Feminino Longo Estampado Tie Dye com Fenda Alça Fina Multicor P\",\r\n                \"skuName\": \"P\",\r\n                \"quantity\": 1,\r\n                \"limitQuantity\": 5,\r\n                \"sellerName\": \"C&A\",\r\n                \"price\": 119.99,\r\n                \"listPrice\": 119.99,\r\n                \"discount\": 0,\r\n                \"deliveryOptions\": [{\r\n                        \"name\": \"Entregar em casa\",\r\n                        \"type\": \"homeDelivery\",\r\n                        \"shippingEstimate\": \"Prazo a calcular\",\r\n                        \"selected\": true\r\n                    }, {\r\n                        \"name\": \"Retire na loja\",\r\n                        \"options\": null,\r\n                        \"type\": \"storeDelivery\",\r\n                        \"shippingEstimate\": \"A partir de 14 dias úteis\",\r\n                        \"selected\": true,\r\n                        \"selectedInfo\": {\r\n                            \"sla\": \"Retirada na Loja (MNU)\",\r\n                            \"shippingEstimate\": \"Retire a partir de 14 dias úteis\",\r\n                            \"selectedDeliveryChannel\": \"pickup-in-point\",\r\n                            \"store\": \"C&A North Shopping Maracanaú\"\r\n                        }\r\n                    }\r\n                ],\r\n\t\t\t\t\"message\": \"\"\r\n            }\r\n        ],\r\n        \"totalItems\": 1\r\n    }\r\n}\r\n\r\n\r\n\r\n",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "params",
+                                        "modifier": "CARTID",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "itemId",
+                                        "value": "[\\d]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "postalCode",
+                                        "value": "[\\w]{1,}",
+                                        "isRegex": true
+                                    },
+                                    {
+                                        "target": "body",
+                                        "modifier": "deliveryOption",
+                                        "value": "Entregar em casa",
+                                        "isRegex": false
+                                    }
+                                ],
+                                "rulesOperator": "AND",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "https": false,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "proxyReqHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ],
+                "proxyResHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

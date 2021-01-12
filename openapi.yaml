@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: app-v2
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000/api'
+paths:
+  /cart/v2:
+    get:
+      description: rota para recuperação do carrinho
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json: {}
+          headers:
+            '':
+              schema:
+                type: string
+              example: ''
+        '404':
+          description: ''
+          content:
+            application/json: {}
+          headers: {}
+    post:
+      description: rota para criação do carrinho
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json: {}
+          headers:
+            '':
+              schema:
+                type: string
+              example: ''
+  /cart/v2/items:
+    post:
+      description: rota para adicão de iten(s) no carrinho
+      parameters:
+        - in: header
+          name: cartId
+          schema:
+            type: string
+          required: true
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                cart:
+                  value: |-
+                    {
+                        "items": [
+                            {
+                                "productId": 269,
+                                "quantity": 1
+                            }
+                        ]
+                    }
+          headers:
+            '':
+              schema:
+                type: string
+              example: ''
+        '400':
+          description: ''
+          content:
+            application/json: {}
+          headers:
+            '':
+              schema:
+                type: string
+              example: ''
+
+components:
+  schemas:
+    Product:
+      title: Produto
+      type: object
+      properties:
+        productId:
+          type: integer
+          description: Id do produto
+        quantity:
+          type: integer
+          description: quantidade do produto
+      required:
+        - productId
+        - quantity
+  requestBodies:
+    productAdd:
+      description: Request de adição de produto no carrinho
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
