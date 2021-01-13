@@ -4,7 +4,7 @@
     "description": "",
     "main": "./mockoon-server/index.js",
     "scripts": {
-        "start": "/mockoon-server/node_modules/.bin/mockoon start --data ../cart_v2.json -i 0"
+        "build": "vercel build --output public"
     },
     "author": "",
     "license": "ISC",
