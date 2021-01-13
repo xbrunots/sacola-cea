@@ -1,0 +1,14 @@
+{
+    "name": "mockoon-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./mockoon-server/index.js",
+    "scripts": {
+        "start": "/mockoon-server/node_modules/.bin/mockoon start --data ../cart_v2.json -i 0"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@mockoon/cli": "0.1.0-beta.2"
+    }
+}
